@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyTorch checkpoints and heavy datasets
+dataset/
+kfold_splits/
+kfold_runs/
+experiments/**/weights/last.pt
+runs/
+*.pt
+*.zip
+*.tar.gz
+*.tar
+
+# Jupyter & IDE
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.env
+
+# Whitelist reports, notebooks, and final artifacts
+!reports/
+!reports/**
+!notebooks/
+!notebooks/**
+!best_model.pt
