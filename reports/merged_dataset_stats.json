@@ -1,0 +1,11 @@
+{
+  "total_images": 115,
+  "ds1_images": 65,
+  "ds2_images": 50,
+  "background_negative_images": 15,
+  "defect_instances": {
+    "corrosion": 100,
+    "crack": 31,
+    "coating_damage": 30
+  }
+}

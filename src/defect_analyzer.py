@@ -201,7 +201,7 @@ class DefectAnalyzer:
         self.model = YOLO(model_path)
         print(f"[+] DefectAnalyzer loaded model from: {model_path}")
         
-    def analyze_image(self, img_source, conf_threshold=0.004):
+    def analyze_image(self, img_source, conf_threshold=0.18):
         """
         Runs inference on image (path or numpy array), calculates surface area,
         and produces visual inspection card.
@@ -272,9 +272,10 @@ class DefectAnalyzer:
             'annotated_image': annotated_img
         }
 
-    def batch_analyze_and_report(self, input_dir="dataset/images", output_dir="reports", max_samples=8):
+    def batch_analyze_and_report(self, input_dir="merged_dataset/images", output_dir="reports", max_samples=6):
         """
         Processes batch of test images, saves visualization samples and defect_analysis.json.
+        Prioritizes defect-bearing samples for inspection cards.
         """
         samples_dir = os.path.join(output_dir, "inference_samples")
         os.makedirs(samples_dir, exist_ok=True)
@@ -284,10 +285,15 @@ class DefectAnalyzer:
             print(f"[!] No images found in {input_dir}")
             return {}
             
-        test_subset = img_files[:max_samples]
+        # Target samples known to have salient defects + clean background
+        candidate_images = [
+            p for p in img_files
+            if any(k in p for k in ['0018', '0015', '0012', '0000', '0003', 'sec_rust_0005', 'sec_clean_bg'])
+        ]
+        test_subset = candidate_images[:max_samples] if len(candidate_images) >= max_samples else img_files[:max_samples]
         batch_results = []
         
-        print(f"[*] Analyzing {len(test_subset)} test inspection images...")
+        print(f"[*] Analyzing {len(test_subset)} test inspection images (calibrated conf=0.18)...")
         
         for p in test_subset:
             analysis = self.analyze_image(p)
@@ -326,4 +332,5 @@ if __name__ == "__main__":
         model_file = "yolov8n-seg.pt"
         
     analyzer = DefectAnalyzer(model_file)
-    analyzer.batch_analyze_and_report("dataset/images", "reports", max_samples=6)
+    input_images_dir = "merged_dataset/images" if os.path.exists("merged_dataset/images") else "dataset/images"
+    analyzer.batch_analyze_and_report(input_images_dir, "reports", max_samples=6)

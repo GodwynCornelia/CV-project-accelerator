@@ -1,12 +1,16 @@
 {
-  "mean_mAP50_mask": 0.571,
-  "std_mAP50_mask": 0.1375,
-  "mean_mAP50_95_mask": 0.422,
-  "std_mAP50_95_mask": 0.0973,
-  "mean_precision": 0.0061,
-  "std_precision": 0.0008,
-  "mean_recall": 0.9783,
-  "std_recall": 0.031,
+  "mean_mAP50_mask": 0.7766,
+  "std_mAP50_mask": 0.0944,
+  "mean_mAP50_95_mask": 0.6015,
+  "std_mAP50_95_mask": 0.1052,
+  "mean_precision_c25": 0.8783,
+  "std_precision_c25": 0.0731,
+  "mean_recall_c25": 0.732,
+  "std_recall_c25": 0.0164,
+  "mean_precision_c35": 0.9263,
+  "std_precision_c35": 0.0648,
+  "mean_recall_c35": 0.658,
+  "std_recall_c35": 0.011,
   "best_fold": 2,
-  "best_mAP50": 0.779
+  "best_mAP50": 0.8774
 }

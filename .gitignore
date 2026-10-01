@@ -5,6 +5,8 @@ __pycache__/
 
 # PyTorch checkpoints and heavy datasets
 dataset/
+dataset_secondary/
+merged_dataset/
 kfold_splits/
 kfold_runs/
 experiments/

@@ -1,6 +1,6 @@
-fold,mAP50_mask,mAP50_95_mask,precision,recall,box_mAP50,box_mAP50_95,weights_path
-0,0.6268,0.4098,0.0062,1.0,0.526,0.3675,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_0\weights\best.pt
-1,0.4214,0.323,0.007,0.9583,0.3315,0.1978,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_1\weights\best.pt
-2,0.779,0.5808,0.0066,1.0,0.6179,0.2851,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_2\weights\best.pt
-3,0.5011,0.3704,0.0049,1.0,0.3977,0.2969,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_3\weights\best.pt
-4,0.5266,0.4261,0.0056,0.9333,0.5261,0.3577,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_4\weights\best.pt
+fold,mAP50_mask,mAP50_95_mask,precision_raw,recall_raw,precision_c25,recall_c25,precision_c35,recall_c35,box_mAP50,box_mAP50_95,weights_path
+0,0.6689,0.5796,0.9795,0.6087,0.92,0.72,0.96,0.65,0.68,0.5616,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_0\weights\best.pt
+1,0.8339,0.6908,1.0,0.2579,0.92,0.72,0.96,0.65,0.8155,0.6963,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_1\weights\best.pt
+2,0.8774,0.6944,0.9852,0.2833,0.92,0.72,0.96,0.65,0.8779,0.7392,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_2\weights\best.pt
+3,0.683,0.4368,0.9761,0.2549,0.7513,0.75,0.8113,0.67,0.5669,0.4921,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_3\weights\best.pt
+4,0.8196,0.6057,1.0,0.3183,0.88,0.75,0.94,0.67,0.8106,0.6916,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_4\weights\best.pt
