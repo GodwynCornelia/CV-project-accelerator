@@ -1,0 +1,12 @@
+{
+  "mean_mAP50_mask": 0.571,
+  "std_mAP50_mask": 0.1375,
+  "mean_mAP50_95_mask": 0.422,
+  "std_mAP50_95_mask": 0.0973,
+  "mean_precision": 0.0061,
+  "std_precision": 0.0008,
+  "mean_recall": 0.9783,
+  "std_recall": 0.031,
+  "best_fold": 2,
+  "best_mAP50": 0.779
+}

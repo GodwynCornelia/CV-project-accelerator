@@ -1,0 +1,6 @@
+fold,mAP50_mask,mAP50_95_mask,precision,recall,box_mAP50,box_mAP50_95,weights_path
+0,0.6268,0.4098,0.0062,1.0,0.526,0.3675,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_0\weights\best.pt
+1,0.4214,0.323,0.007,0.9583,0.3315,0.1978,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_1\weights\best.pt
+2,0.779,0.5808,0.0066,1.0,0.6179,0.2851,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_2\weights\best.pt
+3,0.5011,0.3704,0.0049,1.0,0.3977,0.2969,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_3\weights\best.pt
+4,0.5266,0.4261,0.0056,0.9333,0.5261,0.3577,I:\Пет проект\CV-project-accelerator\runs\segment\kfold_runs\fold_4\weights\best.pt
