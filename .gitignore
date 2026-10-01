@@ -7,7 +7,7 @@ __pycache__/
 dataset/
 kfold_splits/
 kfold_runs/
-experiments/**/weights/last.pt
+experiments/
 runs/
 *.pt
 *.zip
