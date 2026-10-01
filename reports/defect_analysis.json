@@ -1,0 +1,628 @@
+{
+  "project": "TRL 3 PoC - Reservoir & Pipeline Defect Detection",
+  "target_directions": [
+    "Direction #2: Computer Vision",
+    "Direction #3: Infrastructure Monitoring"
+  ],
+  "evaluated_samples_count": 6,
+  "inspection_results": [
+    {
+      "image_name": "tank_pipe_defect_0000.jpg",
+      "image_dimensions": {
+        "width": 640,
+        "height": 640
+      },
+      "total_defect_percent": 2.442,
+      "risk_level": "WARNING",
+      "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
+      "class_breakdown": {
+        "corrosion": {
+          "class_id": 0,
+          "ru_name": "Коррозия",
+          "count": 4,
+          "area_px": 9972,
+          "percent_surface": 2.435
+        },
+        "crack": {
+          "class_id": 1,
+          "ru_name": "Трещина / Излом",
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
+        },
+        "coating_damage": {
+          "class_id": 2,
+          "ru_name": "Повреждение ЛКП",
+          "count": 2,
+          "area_px": 9636,
+          "percent_surface": 2.353
+        }
+      },
+      "detections_count": 6,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0105,
+          "bbox": [
+            414.77,
+            321.7,
+            530.96,
+            447.52
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.007,
+          "bbox": [
+            414.39,
+            321.05,
+            632.03,
+            447.62
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0056,
+          "bbox": [
+            413.93,
+            319.16,
+            535.25,
+            574.53
+          ]
+        },
+        {
+          "class_id": 2,
+          "class_name": "coating_damage",
+          "confidence": 0.0048,
+          "bbox": [
+            311.8,
+            318.01,
+            533.19,
+            460.02
+          ]
+        },
+        {
+          "class_id": 2,
+          "class_name": "coating_damage",
+          "confidence": 0.0048,
+          "bbox": [
+            310.5,
+            317.95,
+            545.65,
+            561.64
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0048,
+          "bbox": [
+            414.06,
+            324.83,
+            640.0,
+            640.0
+          ]
+        }
+      ],
+      "visual_report_path": "reports\\inference_samples\\inspected_tank_pipe_defect_0000.jpg"
+    },
+    {
+      "image_name": "tank_pipe_defect_0001.jpg",
+      "image_dimensions": {
+        "width": 640,
+        "height": 640
+      },
+      "total_defect_percent": 0.431,
+      "risk_level": "CRITICAL",
+      "risk_description": "КРИТИЧЕСКИЙ РИСК: Обнаружены трещины или обширная коррозия (>5%). Требуется аварийный останов / ремонт.",
+      "class_breakdown": {
+        "corrosion": {
+          "class_id": 0,
+          "ru_name": "Коррозия",
+          "count": 3,
+          "area_px": 1528,
+          "percent_surface": 0.373
+        },
+        "crack": {
+          "class_id": 1,
+          "ru_name": "Трещина / Излом",
+          "count": 1,
+          "area_px": 1516,
+          "percent_surface": 0.37
+        },
+        "coating_damage": {
+          "class_id": 2,
+          "ru_name": "Повреждение ЛКП",
+          "count": 2,
+          "area_px": 1600,
+          "percent_surface": 0.391
+        }
+      },
+      "detections_count": 6,
+      "detections": [
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0123,
+          "bbox": [
+            323.67,
+            151.79,
+            402.77,
+            279.92
+          ]
+        },
+        {
+          "class_id": 2,
+          "class_name": "coating_damage",
+          "confidence": 0.0116,
+          "bbox": [
+            327.13,
+            156.34,
+            403.26,
+            273.47
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0065,
+          "bbox": [
+            252.58,
+            153.76,
+            403.31,
+            272.49
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0059,
+          "bbox": [
+            343.76,
+            142.79,
+            609.78,
+            274.34
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0055,
+          "bbox": [
+            345.07,
+            146.24,
+            640.0,
+            265.31
+          ]
+        },
+        {
+          "class_id": 2,
+          "class_name": "coating_damage",
+          "confidence": 0.0051,
+          "bbox": [
+            293.88,
+            60.42,
+            406.77,
+            276.62
+          ]
+        }
+      ],
+      "visual_report_path": "reports\\inference_samples\\inspected_tank_pipe_defect_0001.jpg"
+    },
+    {
+      "image_name": "tank_pipe_defect_0002.jpg",
+      "image_dimensions": {
+        "width": 640,
+        "height": 640
+      },
+      "total_defect_percent": 1.277,
+      "risk_level": "CRITICAL",
+      "risk_description": "КРИТИЧЕСКИЙ РИСК: Обнаружены трещины или обширная коррозия (>5%). Требуется аварийный останов / ремонт.",
+      "class_breakdown": {
+        "corrosion": {
+          "class_id": 0,
+          "ru_name": "Коррозия",
+          "count": 3,
+          "area_px": 5224,
+          "percent_surface": 1.275
+        },
+        "crack": {
+          "class_id": 1,
+          "ru_name": "Трещина / Излом",
+          "count": 1,
+          "area_px": 4828,
+          "percent_surface": 1.179
+        },
+        "coating_damage": {
+          "class_id": 2,
+          "ru_name": "Повреждение ЛКП",
+          "count": 2,
+          "area_px": 5056,
+          "percent_surface": 1.234
+        }
+      },
+      "detections_count": 6,
+      "detections": [
+        {
+          "class_id": 2,
+          "class_name": "coating_damage",
+          "confidence": 0.0106,
+          "bbox": [
+            92.69,
+            474.83,
+            189.64,
+            581.36
+          ]
+        },
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0079,
+          "bbox": [
+            85.04,
+            474.84,
+            180.53,
+            598.97
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0057,
+          "bbox": [
+            91.12,
+            462.67,
+            320.18,
+            582.2
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0056,
+          "bbox": [
+            82.57,
+            470.04,
+            186.28,
+            640.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0051,
+          "bbox": [
+            0.0,
+            467.7,
+            192.2,
+            603.65
+          ]
+        },
+        {
+          "class_id": 2,
+          "class_name": "coating_damage",
+          "confidence": 0.005,
+          "bbox": [
+            91.03,
+            468.1,
+            190.34,
+            640.0
+          ]
+        }
+      ],
+      "visual_report_path": "reports\\inference_samples\\inspected_tank_pipe_defect_0002.jpg"
+    },
+    {
+      "image_name": "tank_pipe_defect_0003.jpg",
+      "image_dimensions": {
+        "width": 640,
+        "height": 640
+      },
+      "total_defect_percent": 3.771,
+      "risk_level": "WARNING",
+      "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
+      "class_breakdown": {
+        "corrosion": {
+          "class_id": 0,
+          "ru_name": "Коррозия",
+          "count": 6,
+          "area_px": 15448,
+          "percent_surface": 3.771
+        },
+        "crack": {
+          "class_id": 1,
+          "ru_name": "Трещина / Излом",
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
+        },
+        "coating_damage": {
+          "class_id": 2,
+          "ru_name": "Повреждение ЛКП",
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
+        }
+      },
+      "detections_count": 6,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0117,
+          "bbox": [
+            340.61,
+            231.09,
+            505.06,
+            402.5
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0074,
+          "bbox": [
+            418.95,
+            301.14,
+            516.28,
+            394.65
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0062,
+          "bbox": [
+            334.73,
+            223.38,
+            515.15,
+            454.07
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.006,
+          "bbox": [
+            424.16,
+            319.41,
+            516.61,
+            468.46
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0051,
+          "bbox": [
+            430.4,
+            315.21,
+            640.0,
+            386.84
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0049,
+          "bbox": [
+            80.02,
+            255.95,
+            505.78,
+            396.94
+          ]
+        }
+      ],
+      "visual_report_path": "reports\\inference_samples\\inspected_tank_pipe_defect_0003.jpg"
+    },
+    {
+      "image_name": "tank_pipe_defect_0004.jpg",
+      "image_dimensions": {
+        "width": 640,
+        "height": 640
+      },
+      "total_defect_percent": 0.093,
+      "risk_level": "CRITICAL",
+      "risk_description": "КРИТИЧЕСКИЙ РИСК: Обнаружены трещины или обширная коррозия (>5%). Требуется аварийный останов / ремонт.",
+      "class_breakdown": {
+        "corrosion": {
+          "class_id": 0,
+          "ru_name": "Коррозия",
+          "count": 2,
+          "area_px": 356,
+          "percent_surface": 0.087
+        },
+        "crack": {
+          "class_id": 1,
+          "ru_name": "Трещина / Излом",
+          "count": 4,
+          "area_px": 372,
+          "percent_surface": 0.091
+        },
+        "coating_damage": {
+          "class_id": 2,
+          "ru_name": "Повреждение ЛКП",
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
+        }
+      },
+      "detections_count": 6,
+      "detections": [
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0181,
+          "bbox": [
+            130.94,
+            494.5,
+            193.35,
+            562.8
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0082,
+          "bbox": [
+            39.43,
+            497.83,
+            192.26,
+            558.93
+          ]
+        },
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0071,
+          "bbox": [
+            150.02,
+            508.24,
+            456.98,
+            564.2
+          ]
+        },
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0064,
+          "bbox": [
+            141.38,
+            475.7,
+            190.65,
+            561.85
+          ]
+        },
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0059,
+          "bbox": [
+            0.0,
+            385.3,
+            186.97,
+            560.69
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0049,
+          "bbox": [
+            0.0,
+            496.36,
+            507.66,
+            640.0
+          ]
+        }
+      ],
+      "visual_report_path": "reports\\inference_samples\\inspected_tank_pipe_defect_0004.jpg"
+    },
+    {
+      "image_name": "tank_pipe_defect_0005.jpg",
+      "image_dimensions": {
+        "width": 640,
+        "height": 640
+      },
+      "total_defect_percent": 1.21,
+      "risk_level": "CRITICAL",
+      "risk_description": "КРИТИЧЕСКИЙ РИСК: Обнаружены трещины или обширная коррозия (>5%). Требуется аварийный останов / ремонт.",
+      "class_breakdown": {
+        "corrosion": {
+          "class_id": 0,
+          "ru_name": "Коррозия",
+          "count": 2,
+          "area_px": 4780,
+          "percent_surface": 1.167
+        },
+        "crack": {
+          "class_id": 1,
+          "ru_name": "Трещина / Излом",
+          "count": 4,
+          "area_px": 4948,
+          "percent_surface": 1.208
+        },
+        "coating_damage": {
+          "class_id": 2,
+          "ru_name": "Повреждение ЛКП",
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
+        }
+      },
+      "detections_count": 6,
+      "detections": [
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0096,
+          "bbox": [
+            136.19,
+            360.03,
+            207.34,
+            434.67
+          ]
+        },
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0089,
+          "bbox": [
+            269.49,
+            299.6,
+            329.57,
+            376.79
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0066,
+          "bbox": [
+            156.69,
+            299.14,
+            327.64,
+            403.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.0066,
+          "bbox": [
+            48.96,
+            359.3,
+            208.13,
+            431.98
+          ]
+        },
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0062,
+          "bbox": [
+            278.99,
+            303.86,
+            486.05,
+            373.91
+          ]
+        },
+        {
+          "class_id": 1,
+          "class_name": "crack",
+          "confidence": 0.0062,
+          "bbox": [
+            144.29,
+            343.42,
+            205.56,
+            439.75
+          ]
+        }
+      ],
+      "visual_report_path": "reports\\inference_samples\\inspected_tank_pipe_defect_0005.jpg"
+    }
+  ]
+}
