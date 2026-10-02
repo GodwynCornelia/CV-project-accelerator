@@ -7,12 +7,12 @@
   "evaluated_samples_count": 6,
   "inspection_results": [
     {
-      "image_name": "ds1_tank_pipe_defect_0000.jpg",
+      "image_name": "lab_ds1_tank_pipe_defect_0000.jpg",
       "image_dimensions": {
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 2.439,
+      "total_defect_percent": 2.52,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -20,8 +20,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 1,
-          "area_px": 9992,
-          "percent_surface": 2.439
+          "area_px": 10320,
+          "percent_surface": 2.52
         },
         "crack": {
           "class_id": 1,
@@ -43,24 +43,24 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.1953,
+          "confidence": 0.4085,
           "bbox": [
-            411.82,
-            315.02,
-            545.13,
-            458.86
+            413.38,
+            315.2,
+            548.82,
+            457.54
           ]
         }
       ],
-      "visual_report_path": "reports\\inference_samples\\inspected_ds1_tank_pipe_defect_0000.jpg"
+      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0000.jpg"
     },
     {
-      "image_name": "ds1_tank_pipe_defect_0003.jpg",
+      "image_name": "lab_ds1_tank_pipe_defect_0003.jpg",
       "image_dimensions": {
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 3.814,
+      "total_defect_percent": 4.682,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -68,8 +68,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 1,
-          "area_px": 15624,
-          "percent_surface": 3.814
+          "area_px": 19176,
+          "percent_surface": 4.682
         },
         "crack": {
           "class_id": 1,
@@ -91,24 +91,24 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.2232,
+          "confidence": 0.3912,
           "bbox": [
-            328.31,
-            234.63,
-            507.22,
-            404.08
+            328.33,
+            237.06,
+            528.03,
+            406.4
           ]
         }
       ],
-      "visual_report_path": "reports\\inference_samples\\inspected_ds1_tank_pipe_defect_0003.jpg"
+      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0003.jpg"
     },
     {
-      "image_name": "ds1_tank_pipe_defect_0012.jpg",
+      "image_name": "lab_ds1_tank_pipe_defect_0012.jpg",
       "image_dimensions": {
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 2.597,
+      "total_defect_percent": 2.819,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -116,8 +116,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 1,
-          "area_px": 10636,
-          "percent_surface": 2.597
+          "area_px": 11548,
+          "percent_surface": 2.819
         },
         "crack": {
           "class_id": 1,
@@ -139,24 +139,24 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.2319,
+          "confidence": 0.4472,
           "bbox": [
-            404.63,
-            320.82,
-            555.79,
-            444.11
+            403.29,
+            315.72,
+            559.14,
+            444.95
           ]
         }
       ],
-      "visual_report_path": "reports\\inference_samples\\inspected_ds1_tank_pipe_defect_0012.jpg"
+      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0012.jpg"
     },
     {
-      "image_name": "ds1_tank_pipe_defect_0015.jpg",
+      "image_name": "lab_ds1_tank_pipe_defect_0015.jpg",
       "image_dimensions": {
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 1.832,
+      "total_defect_percent": 1.91,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -164,8 +164,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 1,
-          "area_px": 7504,
-          "percent_surface": 1.832
+          "area_px": 7824,
+          "percent_surface": 1.91
         },
         "crack": {
           "class_id": 1,
@@ -187,24 +187,24 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.2504,
+          "confidence": 0.6068,
           "bbox": [
-            320.38,
-            168.33,
-            450.04,
-            286.96
+            321.12,
+            168.31,
+            447.93,
+            292.49
           ]
         }
       ],
-      "visual_report_path": "reports\\inference_samples\\inspected_ds1_tank_pipe_defect_0015.jpg"
+      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0015.jpg"
     },
     {
-      "image_name": "ds1_tank_pipe_defect_0018.jpg",
+      "image_name": "lab_ds1_tank_pipe_defect_0018.jpg",
       "image_dimensions": {
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 4.702,
+      "total_defect_percent": 4.895,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -212,8 +212,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 2,
-          "area_px": 19260,
-          "percent_surface": 4.702
+          "area_px": 20048,
+          "percent_surface": 4.895
         },
         "crack": {
           "class_id": 1,
@@ -235,30 +235,30 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.2656,
+          "confidence": 0.5796,
           "bbox": [
-            430.94,
-            147.91,
-            576.19,
-            258.1
+            430.99,
+            148.98,
+            577.68,
+            258.54
           ]
         },
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.2204,
+          "confidence": 0.4638,
           "bbox": [
-            246.52,
-            158.29,
-            398.2,
-            308.43
+            246.67,
+            160.17,
+            399.34,
+            306.71
           ]
         }
       ],
-      "visual_report_path": "reports\\inference_samples\\inspected_ds1_tank_pipe_defect_0018.jpg"
+      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0018.jpg"
     },
     {
-      "image_name": "ds2_sec_clean_bg_0000.jpg",
+      "image_name": "lab_ds2_sec_clean_bg_0000.jpg",
       "image_dimensions": {
         "width": 640,
         "height": 640
@@ -291,7 +291,7 @@
       },
       "detections_count": 0,
       "detections": [],
-      "visual_report_path": "reports\\inference_samples\\inspected_ds2_sec_clean_bg_0000.jpg"
+      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds2_sec_clean_bg_0000.jpg"
     }
   ]
 }

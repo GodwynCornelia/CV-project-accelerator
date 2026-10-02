@@ -7,8 +7,12 @@ __pycache__/
 dataset/
 dataset_secondary/
 merged_dataset/
+datasets/
+donor_cracks/
+donor_coatings/
 kfold_splits/
 kfold_runs/
+kfold_v2_runs/
 experiments/
 runs/
 *.pt

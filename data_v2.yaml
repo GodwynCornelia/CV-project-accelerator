@@ -1,0 +1,8 @@
+path: datasets/merged_dataset_v2
+train: images
+val: images
+
+names:
+  0: corrosion
+  1: crack
+  2: coating_damage

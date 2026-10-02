@@ -1,0 +1,6 @@
+fold,mAP50_mask,mAP50_95_mask,precision_c25,recall_c25,precision_c35,recall_c35,box_mAP50,box_mAP50_95,best_weights
+0,0.8312,0.6166,0.3333,0.2222,0.3333,0.1778,0.8315,0.6253,I:\Пет проект\CV-project-accelerator\runs\kfold_v2_runs\fold_0_train\weights\best.pt
+1,0.5096,0.4009,0.0,0.0,0.0,0.0,0.5009,0.3825,I:\Пет проект\CV-project-accelerator\runs\kfold_v2_runs\fold_1_train\weights\best.pt
+2,0.8437,0.6683,0.3333,0.2464,0.3333,0.2029,0.862,0.6918,I:\Пет проект\CV-project-accelerator\runs\kfold_v2_runs\fold_2_train\weights\best.pt
+3,0.7734,0.5686,0.6,0.3016,0.5556,0.254,0.7396,0.5561,I:\Пет проект\CV-project-accelerator\runs\kfold_v2_runs\fold_3_train\weights\best.pt
+4,0.8356,0.6113,0.6667,0.3554,0.6667,0.2324,0.8979,0.6751,I:\Пет проект\CV-project-accelerator\runs\kfold_v2_runs\fold_4_train\weights\best.pt

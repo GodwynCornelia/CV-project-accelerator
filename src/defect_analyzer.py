@@ -330,7 +330,6 @@ if __name__ == "__main__":
     model_file = "best_model.pt"
     if not os.path.exists(model_file):
         model_file = "yolov8n-seg.pt"
-        
     analyzer = DefectAnalyzer(model_file)
-    input_images_dir = "merged_dataset/images" if os.path.exists("merged_dataset/images") else "dataset/images"
+    input_images_dir = "datasets/merged_dataset_v2/images" if os.path.exists("datasets/merged_dataset_v2/images") else ("merged_dataset/images" if os.path.exists("merged_dataset/images") else "dataset/images")
     analyzer.batch_analyze_and_report(input_images_dir, "reports", max_samples=6)
