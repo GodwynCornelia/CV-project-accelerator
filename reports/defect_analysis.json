@@ -12,7 +12,7 @@
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 2.52,
+      "total_defect_percent": 2.394,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -20,8 +20,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 1,
-          "area_px": 10320,
-          "percent_surface": 2.52
+          "area_px": 9804,
+          "percent_surface": 2.394
         },
         "crack": {
           "class_id": 1,
@@ -43,12 +43,12 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.4085,
+          "confidence": 0.2874,
           "bbox": [
-            413.38,
-            315.2,
-            548.82,
-            457.54
+            414.45,
+            315.28,
+            544.73,
+            456.6
           ]
         }
       ],
@@ -60,16 +60,16 @@
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 4.682,
-      "risk_level": "WARNING",
-      "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
+      "total_defect_percent": 0.0,
+      "risk_level": "NORMAL",
+      "risk_description": "НОРМА: Дефекты минимальны (<1%) либо отсутствуют. Объект допущен к эксплуатации.",
       "class_breakdown": {
         "corrosion": {
           "class_id": 0,
           "ru_name": "Коррозия",
-          "count": 1,
-          "area_px": 19176,
-          "percent_surface": 4.682
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
         },
         "crack": {
           "class_id": 1,
@@ -86,20 +86,8 @@
           "percent_surface": 0.0
         }
       },
-      "detections_count": 1,
-      "detections": [
-        {
-          "class_id": 0,
-          "class_name": "corrosion",
-          "confidence": 0.3912,
-          "bbox": [
-            328.33,
-            237.06,
-            528.03,
-            406.4
-          ]
-        }
-      ],
+      "detections_count": 0,
+      "detections": [],
       "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0003.jpg"
     },
     {
@@ -108,16 +96,16 @@
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 2.819,
-      "risk_level": "WARNING",
-      "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
+      "total_defect_percent": 0.0,
+      "risk_level": "NORMAL",
+      "risk_description": "НОРМА: Дефекты минимальны (<1%) либо отсутствуют. Объект допущен к эксплуатации.",
       "class_breakdown": {
         "corrosion": {
           "class_id": 0,
           "ru_name": "Коррозия",
-          "count": 1,
-          "area_px": 11548,
-          "percent_surface": 2.819
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
         },
         "crack": {
           "class_id": 1,
@@ -134,20 +122,8 @@
           "percent_surface": 0.0
         }
       },
-      "detections_count": 1,
-      "detections": [
-        {
-          "class_id": 0,
-          "class_name": "corrosion",
-          "confidence": 0.4472,
-          "bbox": [
-            403.29,
-            315.72,
-            559.14,
-            444.95
-          ]
-        }
-      ],
+      "detections_count": 0,
+      "detections": [],
       "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0012.jpg"
     },
     {
@@ -156,7 +132,7 @@
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 1.91,
+      "total_defect_percent": 1.765,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -164,8 +140,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 1,
-          "area_px": 7824,
-          "percent_surface": 1.91
+          "area_px": 7228,
+          "percent_surface": 1.765
         },
         "crack": {
           "class_id": 1,
@@ -187,12 +163,12 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.6068,
+          "confidence": 0.2399,
           "bbox": [
-            321.12,
-            168.31,
-            447.93,
-            292.49
+            323.14,
+            175.89,
+            449.89,
+            283.33
           ]
         }
       ],
@@ -204,7 +180,7 @@
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 4.895,
+      "total_defect_percent": 4.562,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -212,8 +188,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 2,
-          "area_px": 20048,
-          "percent_surface": 4.895
+          "area_px": 18688,
+          "percent_surface": 4.562
         },
         "crack": {
           "class_id": 1,
@@ -235,23 +211,23 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.5796,
+          "confidence": 0.2785,
           "bbox": [
-            430.99,
-            148.98,
-            577.68,
-            258.54
+            248.54,
+            158.35,
+            399.98,
+            307.78
           ]
         },
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.4638,
+          "confidence": 0.2751,
           "bbox": [
-            246.67,
-            160.17,
-            399.34,
-            306.71
+            431.1,
+            147.12,
+            568.31,
+            257.65
           ]
         }
       ],

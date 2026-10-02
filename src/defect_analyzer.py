@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 from ultralytics import YOLO
+from postprocessing import refine_mask_borders
 
 
 DEFECT_METADATA = {
@@ -218,11 +219,12 @@ class DefectAnalyzer:
             
         h, w = orig_img.shape[:2]
         
-        # Inference
+        # Inference with TTA
         results = self.model.predict(
             orig_img,
             conf=conf_threshold,
             device='cpu',
+            augment=True,
             verbose=False
         )[0]
         
@@ -242,7 +244,8 @@ class DefectAnalyzer:
             top_indices = order[:6]
             
             for idx in top_indices:
-                m = masks_data[idx]
+                # Apply morphological closing to seal micro-cracks and bridge gaps
+                m = refine_mask_borders(masks_data[idx])
                 b = boxes[idx]
                 c = classes[idx]
                 score = confs[idx]
