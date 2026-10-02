@@ -12,7 +12,7 @@
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 2.394,
+      "total_defect_percent": 2.454,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -20,8 +20,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 1,
-          "area_px": 9804,
-          "percent_surface": 2.394
+          "area_px": 10052,
+          "percent_surface": 2.454
         },
         "crack": {
           "class_id": 1,
@@ -43,12 +43,12 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.2874,
+          "confidence": 0.8992,
           "bbox": [
-            414.45,
-            315.28,
-            544.73,
-            456.6
+            413.33,
+            317.94,
+            544.2,
+            456.73
           ]
         }
       ],
@@ -60,79 +60,7 @@
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 0.0,
-      "risk_level": "NORMAL",
-      "risk_description": "НОРМА: Дефекты минимальны (<1%) либо отсутствуют. Объект допущен к эксплуатации.",
-      "class_breakdown": {
-        "corrosion": {
-          "class_id": 0,
-          "ru_name": "Коррозия",
-          "count": 0,
-          "area_px": 0,
-          "percent_surface": 0.0
-        },
-        "crack": {
-          "class_id": 1,
-          "ru_name": "Трещина / Излом",
-          "count": 0,
-          "area_px": 0,
-          "percent_surface": 0.0
-        },
-        "coating_damage": {
-          "class_id": 2,
-          "ru_name": "Повреждение ЛКП",
-          "count": 0,
-          "area_px": 0,
-          "percent_surface": 0.0
-        }
-      },
-      "detections_count": 0,
-      "detections": [],
-      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0003.jpg"
-    },
-    {
-      "image_name": "lab_ds1_tank_pipe_defect_0012.jpg",
-      "image_dimensions": {
-        "width": 640,
-        "height": 640
-      },
-      "total_defect_percent": 0.0,
-      "risk_level": "NORMAL",
-      "risk_description": "НОРМА: Дефекты минимальны (<1%) либо отсутствуют. Объект допущен к эксплуатации.",
-      "class_breakdown": {
-        "corrosion": {
-          "class_id": 0,
-          "ru_name": "Коррозия",
-          "count": 0,
-          "area_px": 0,
-          "percent_surface": 0.0
-        },
-        "crack": {
-          "class_id": 1,
-          "ru_name": "Трещина / Излом",
-          "count": 0,
-          "area_px": 0,
-          "percent_surface": 0.0
-        },
-        "coating_damage": {
-          "class_id": 2,
-          "ru_name": "Повреждение ЛКП",
-          "count": 0,
-          "area_px": 0,
-          "percent_surface": 0.0
-        }
-      },
-      "detections_count": 0,
-      "detections": [],
-      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0012.jpg"
-    },
-    {
-      "image_name": "lab_ds1_tank_pipe_defect_0015.jpg",
-      "image_dimensions": {
-        "width": 640,
-        "height": 640
-      },
-      "total_defect_percent": 1.765,
+      "total_defect_percent": 3.592,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -140,8 +68,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 1,
-          "area_px": 7228,
-          "percent_surface": 1.765
+          "area_px": 14712,
+          "percent_surface": 3.592
         },
         "crack": {
           "class_id": 1,
@@ -163,12 +91,108 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.2399,
+          "confidence": 0.6816,
           "bbox": [
-            323.14,
-            175.89,
-            449.89,
-            283.33
+            329.62,
+            238.59,
+            486.2,
+            407.29
+          ]
+        }
+      ],
+      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0003.jpg"
+    },
+    {
+      "image_name": "lab_ds1_tank_pipe_defect_0012.jpg",
+      "image_dimensions": {
+        "width": 640,
+        "height": 640
+      },
+      "total_defect_percent": 2.604,
+      "risk_level": "WARNING",
+      "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
+      "class_breakdown": {
+        "corrosion": {
+          "class_id": 0,
+          "ru_name": "Коррозия",
+          "count": 1,
+          "area_px": 10668,
+          "percent_surface": 2.604
+        },
+        "crack": {
+          "class_id": 1,
+          "ru_name": "Трещина / Излом",
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
+        },
+        "coating_damage": {
+          "class_id": 2,
+          "ru_name": "Повреждение ЛКП",
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
+        }
+      },
+      "detections_count": 1,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.9371,
+          "bbox": [
+            412.74,
+            321.22,
+            556.63,
+            445.81
+          ]
+        }
+      ],
+      "visual_report_path": "reports\\inference_samples\\inspected_lab_ds1_tank_pipe_defect_0012.jpg"
+    },
+    {
+      "image_name": "lab_ds1_tank_pipe_defect_0015.jpg",
+      "image_dimensions": {
+        "width": 640,
+        "height": 640
+      },
+      "total_defect_percent": 1.826,
+      "risk_level": "WARNING",
+      "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
+      "class_breakdown": {
+        "corrosion": {
+          "class_id": 0,
+          "ru_name": "Коррозия",
+          "count": 1,
+          "area_px": 7480,
+          "percent_surface": 1.826
+        },
+        "crack": {
+          "class_id": 1,
+          "ru_name": "Трещина / Излом",
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
+        },
+        "coating_damage": {
+          "class_id": 2,
+          "ru_name": "Повреждение ЛКП",
+          "count": 0,
+          "area_px": 0,
+          "percent_surface": 0.0
+        }
+      },
+      "detections_count": 1,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "corrosion",
+          "confidence": 0.8319,
+          "bbox": [
+            325.4,
+            178.86,
+            447.23,
+            285.35
           ]
         }
       ],
@@ -180,7 +204,7 @@
         "width": 640,
         "height": 640
       },
-      "total_defect_percent": 4.562,
+      "total_defect_percent": 4.732,
       "risk_level": "WARNING",
       "risk_description": "ПРЕДУПРЕЖДЕНИЕ: Очаговая коррозия / деградация покрытия (1-5%). Рекомендовано плановое ТО.",
       "class_breakdown": {
@@ -188,8 +212,8 @@
           "class_id": 0,
           "ru_name": "Коррозия",
           "count": 2,
-          "area_px": 18688,
-          "percent_surface": 4.562
+          "area_px": 19384,
+          "percent_surface": 4.732
         },
         "crack": {
           "class_id": 1,
@@ -211,23 +235,23 @@
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.2785,
+          "confidence": 0.9762,
           "bbox": [
-            248.54,
-            158.35,
-            399.98,
-            307.78
+            430.67,
+            148.61,
+            574.86,
+            256.32
           ]
         },
         {
           "class_id": 0,
           "class_name": "corrosion",
-          "confidence": 0.2751,
+          "confidence": 0.9416,
           "bbox": [
-            431.1,
-            147.12,
-            568.31,
-            257.65
+            252.92,
+            160.03,
+            398.31,
+            308.41
           ]
         }
       ],

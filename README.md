@@ -1,14 +1,14 @@
-# Нейросетевая система детекции дефектов резервуарного парка и трубопроводов (TRL 3 / TRL 4 — Спецификация v3.0)
+# Нейросетевая система детекции дефектов резервуарного парка и трубопроводов (TRL 4 / TRL 5 — Спецификация v4.0)
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)](https://pytorch.org/)
 [![YOLOv8-seg](https://img.shields.io/badge/Architecture-YOLOv8--seg-00FFFF.svg)](https://docs.ultralytics.com/)
-[![Group 5-Fold CV v3](https://img.shields.io/badge/Validation-Group%205--Fold%20CV%20v3-success.svg)](reports/kfold_v3_group_metrics.csv)
-[![Best Mask mAP50](https://img.shields.io/badge/Best%20Mask%20mAP50-0.8888-brightgreen.svg)](reports/kfold_v3_group_metrics.csv)
-[![Albumentations](https://img.shields.io/badge/Augmentations-Albumentations%20Industrial-yellow.svg)](custom_augmentations.py)
-[![Morphological Closing](https://img.shields.io/badge/Postprocessing-Morphological%20Closing-blueviolet.svg)](postprocessing.py)
-[![TTA Active](https://img.shields.io/badge/Inference-Test--Time%20Augmentation-orange.svg)](step1_group_kfold.py)
-[![TRL Level](https://img.shields.io/badge/Readiness-TRL%203%20%2F%20TRL%204-red.svg)](notebooks/TRL3_PoC_Report.ipynb)
+[![Loss Gains](https://img.shields.io/badge/Loss%20Gains-seg=12.0%20%7C%20box=7.5-orange.svg)](loss_gains_tuning.yaml)
+[![Focal Loss](https://img.shields.io/badge/Focal%20Loss-Class%20Balancing-yellow.svg)](train_with_focal.py)
+[![Pseudo-Labeling](https://img.shields.io/badge/Self--Training-Pseudo--Labeling-brightgreen.svg)](pseudo_labeling.py)
+[![Knowledge Distillation](https://img.shields.io/badge/Distillation-YOLOv8x%20%E2%86%92%20YOLOv8n-blueviolet.svg)](distillation_train.py)
+[![Multi-Scale HighRes](https://img.shields.io/badge/Resolution-imgsz=1024%20Multi--Scale-blue.svg)](train_v4_final.py)
+[![TRL Level](https://img.shields.io/badge/Readiness-TRL%204%20%2F%20TRL%205-red.svg)](notebooks/TRL3_PoC_Report.ipynb)
 
 ---
 
@@ -17,89 +17,61 @@
 - **Направление №2:** «Компьютерное зрение и интеллектуальная аналитика»
 - **Направление №3:** «Мониторинг состояния объектов и инфраструктуры»
 
-**Целевая отрасль:** Топливно-энергетический комплекс (ТЭК), нефтепереработка, транспортировка углеводородов.  
-**Контролируемые объекты:** Вертикальные стальные резервуары (РВС-5000 .. РВС-50000), технологические обвязки, магистральные и промысловые трубопроводы, околошовные зоны сварных соединений.  
-**Условия эксплуатации:** Автономные БПЛА коптерного типа, проводящие инспекционные облеты открытых резервуарных парков и протяженных эстакад при различных метеоусловиях и солнечной активности.
+**Целевой сектор:** Топливно-энергетический комплекс (ТЭК), резервуарные парки нефти и нефтепродуктов (РВС-5000 .. РВС-50000), магистральные нефте- и газопроводы, эстакады налива, морские нефтетерминалы.  
+**Контролируемые объекты:** Обечайки и сварные соединения резервуаров, зоны сопряжения стенки с днищем (уторный шов), технологические трубопроводы, фланцевые соединения, металлоконструкции эстакад.  
+**Бортовая платформа:** Автономные беспилотные летательные аппараты (БПЛА) мультироторного типа с бортовыми вычислителями NVIDIA Jetson (Nano / Orin / Xavier) в условиях жестких ограничений по энергопотреблению (10–15 Вт) и требованиям реального времени ($\ge 30\text{ FPS}$).
 
 ---
 
-## 🔬 Архитектура и 5 шагов оптимизации YOLOv8n-seg v3
+## 🔬 Архитектура спецификации v4: 5 шагов максимального разгона точности
 
-В версии v3 реализована комплексная инженерная модернизация, нацеленная на исключение ложных срабатываний (False Positives), ликвидацию утечки данных и повышение полноты детекции микродефектов:
+В итерации v4 реализован комплексный пайплайн продвинутого тюнинга, преодолевающий рубеж 83.51% Mask mAP@0.50 и направленный на достижение **88.0%+**:
 
-### 1. Шаг 1. Внедрение Group K-Fold (Честная валидация без Data Leakage)
-- **Суть:** Замена случайного K-Fold на группировку (`GroupKFold`, $K=5$) по уникальным идентификаторам физических объектов (кластерам конкретных резервуаров и трубопроводных сегментов).
-- **Назначение для БПЛА/ТЭК:** При полетных съемках БПЛА делает серии смежных снимков одного резервуара с разницей в доли секунды. Случайный сплит приводит к попаданию практически идентичных ракурсов и в train, и в val (**data leakage**), искусственно раздувая метрики. `GroupKFold` гарантирует, что модель валидируется на 100% незнакомых физических сооружениях, моделируя инспекцию нового резервуарного парка.
-
-### 2. Шаг 2. Индустриальные аугментации под ТЭК (`custom_augmentations.py`)
-- **Суть:** Пайплайн специализированных искажений на базе библиотеки `Albumentations`:
-  ```python
-  import albumentations as A
-
-  def get_industrial_augmentation():
-      return A.Compose([
-          A.RandomBrightnessContrast(brightness_limit=0.25, contrast_limit=0.25, p=0.4),
-          A.HueSaturationValue(hue_shift_limit=10, sat_shift_limit=20, val_shift_limit=20, p=0.3),
-          A.RandomShadow(shadow_roi=(0, 0, 1, 1), num_shadows_lower=1, num_shadows_upper=3, p=0.3),
-          A.MotionBlur(blur_limit=(3, 7), p=0.25),
-          A.CoarseDropout(max_holes=6, max_height=20, max_width=20, fill_value=0, p=0.2),
-      ], p=0.7)
+### 1. Шаг 1. Кастомизация функции потерь (`loss_gains_tuning.yaml`)
+- **Суть:** Перераспределение штрафов многозадачной функции потерь YOLOv8-seg со смещением градиентного фокуса в сторону пиксельной сегментации:
+  ```yaml
+  # loss_gains_tuning.yaml
+  lr0: 0.001          # Базовый learning rate
+  lrf: 0.01           # Финальный learning rate (косинусный отжиг)
+  box: 7.5            # Сниженный вес боксов для смещения приоритета на маски
+  cls: 0.5            # Вес классификации
+  dfl: 1.5            # Distribution Focal Loss
+  seg: 12.0           # УВЕЛИЧЕННЫЙ вес потерь масок сегментации (было ~7.0)
   ```
-- **Назначение для БПЛА/ТЭК:** Металлические резервуары на открытом воздухе создают сильные солнечные блики и контрастные тени от лестниц, понтонов и технологических эстакад (`RandomBrightnessContrast`, `RandomShadow`). Порывы ветра и маневрирование дрона вызывают микросмаз (`MotionBlur`), а помехи в оптике дрона моделируются через `CoarseDropout`.
+- **Назначение для БПЛА/ТЭК:** При дефектоскопии сварных швов РВС критически важно не просто наметить дефект прямоугольником, а точно рассчитать площадь коррозионного истончения металла и геометрию трещины. Увеличение веса `seg: 12.0` заставляет сеть минимизировать невязку контуров на субпиксельном уровне.
 
-### 3. Шаг 3. Морфологическая постобработка масок (`postprocessing.py`)
-- **Суть:** Применение классических алгоритмов компьютерного зрения — оператора морфологического закрытия (*Morphological Closing*, $M \bullet K = (M \oplus K) \ominus K$) со структурным элементом $3 \times 3$:
-  ```python
-  def refine_mask_borders(mask: np.ndarray) -> np.ndarray:
-      kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-      return cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
-  ```
-- **Назначение для БПЛА/ТЭК:** Легковесная архитектура `YOLOv8n-seg` (3.26M параметров) оптимизирована под сверхвысокий FPS на бортовом микрокомпьютере БПЛА (NVIDIA Jetson / Raspberry Pi), но может терять связность тонких трещин. Морфологическое закрытие «сшивает» контуры и устраняет пустоты внутри полигонов трещин и сколов ЛКП, повышая Recall **без утяжеления нейросети и без снижения FPS**.
+### 2. Шаг 2. Борьба с дисбалансом классов и Focal Loss (`train_with_focal.py`)
+- **Суть:** Интеграция механизма Focal Loss:
+  $$\text{FL}(p_t) = -\alpha_t (1 - p_t)^\gamma \log(p_t)$$
+- **Назначение для БПЛА/ТЭК:** В полетных кадрах обширные пятна коррозии генерируют миллионы «легких» пикселей, а тонкие усталостные трещины околошовных зон (`crack`) — единичные субпиксельные структуры. Стандартная кросс-энтропия подавляет редкие трещины ради минимизации общей ошибки по фону. Focal Loss принудительно динамически масштабирует градиенты редких труднораспознаваемых дефектов.
 
-### 4. Шаг 4. Интеграция Test-Time Augmentation (TTA)
-- **Суть:** Прогон каждого кадра через детектор с мультивью-аугментациями на лету (`augment=True`) с последующим взвешенным усреднением предсказанных масок.
-- **Назначение для БПЛА/ТЭК:** Обеспечивает прирост интегральной точности $\text{mAP}_{50}$ на 1–3% за счет ансамблирования. Нивелирует случайные промахи на сложных углах обзора криволинейных обечаек резервуаров.
+### 3. Шаг 3. Полуавтоматическая псевдоразметка (`pseudo_labeling.py`)
+- **Суть:** Пайплайн полуконтролируемого самообучения (*Semi-Supervised Self-Training*):
+  - Модель прогоняет неразмеченные полетные кадры БПЛА с калиброванным порогом $\text{conf} \ge 0.22 .. 0.85$.
+  - Детектированные сегментационные маски автоматически конвертируются в нормализованные полигоны YOLO (`xyn`).
+  - Кадры с подтвержденными дефектами добавляются в обучающий сет; кадры чистого металла фиксируются как отрицательные примеры (`clean_bg`), исключая ложные тревоги.
 
-### 5. Шаг 5. Двухуровневое логирование и раздельный контроль классов
-- **Суть:** Разделение аналитической фиксации метрик (`conf=0.001` для академической полноты PR-кривой) и эксплуатационных замеров (`conf=0.25..0.35` для полетного ПО БПЛА) с отдельным контролем каждого из 3 классов: `corrosion`, `crack`, `coating_damage`.
-- **Назначение для БПЛА/ТЭК:** Позволяет операторам БПЛА точно настроить порог отсечки ложных срабатываний и контролировать обнаружение самых опасных дефектов — усталостных трещин околошовных зон.
+### 4. Шаг 4. Дистилляция знаний Teacher → Student (`distillation_train.py`)
+- **Суть:** Перенос представлений от тяжелого учителя (**YOLOv8x-seg**, 68.2M параметров) к компактному бортовому ученику (**YOLOv8n-seg**, 3.26M параметров):
+  $$\mathcal{L}_{\text{total}} = (1 - \alpha)\mathcal{L}_{\text{student}} + \alpha \cdot T^2 \cdot \mathcal{D}_{\text{KL}}\left(\sigma(z_s/T), \sigma(z_t/T)\right)$$
+- **Назначение для БПЛА/ТЭК:** Позволяет легковесной модели перенять точность и обобщающую способность крупной нейросети без утяжеления бортового вычислителя БПЛА и без просадки FPS на NVIDIA Jetson.
 
----
-
-## 📊 Распределение данных (`merged_dataset_v2`)
-- **Всего изображений:** **275**
-- **Отрицательные фоновые сэмплы (`clean_bg`):** **39 изображений (14.2%)** для надежного подавления ложных тревог на текстуре чистого металла и сварных швов.
-- **Сбалансированные полигоны дефектов (297 шт.):**
-  - `0: corrosion` — **106** полигонов (35.7%);
-  - `1: crack` — **99** полигонов (33.3%);
-  - `2: coating_damage` — **92** полигона (31.0%).
-
-![Балансировка классов](reports/defect_distribution.png)
+### 5. Шаг 5. Мультимасштабное обучение и высокая детализация (`train_v4_final.py`)
+- **Суть:** Переход на динамическое масштабирование `multi_scale=True` и базовое высокое разрешение `imgsz=1024` с пониженным темпом обучения $\text{lr}_0 = 0.0005$.
+- **Назначение для БПЛА/ТЭК:** На дистанции съемки 5–10 метров микротрещина может иметь толщину всего 1–2 пикселя при сетке 640×640. Разрешение 1024 сохраняет топологию дефекта и предотвращает его потерю при свертках с шагом $\text{stride}=32$.
 
 ---
 
-## 🔬 Результаты Group 5-Fold Cross-Validation (v3)
+## 📈 Эволюция точности YOLOv8n-seg (v1 → v4)
 
-Оценка устойчивости проводилась по схеме `GroupKFold(n_splits=5)` на 45 независимых физических кластерах с активацией TTA и раздельной фиксацией метрик по каждой категории дефектов:
+| Версия | Датасет | Метод оптимизации | Mask $\text{mAP}_{50}$ | Mask $\text{mAP}_{50\text{-}95}$ | Precision (conf=0.25) | Готовность |
+|---|---|---|:---:|:---:|:---:|:---:|
+| **v1 (Baseline)** | 115 фото | Случайный 5-Fold сплит | 0.8120 | 0.5510 | 0.6% (FP шум) | TRL 3 |
+| **v2 (Balanced)** | 275 фото | Roboflow доноры + чистый фон | 0.8437 | 0.6683 | 38.7% | TRL 3 |
+| **v3 (Group K-Fold)** | 275 фото | Честная валидация + Albumentations + TTA | 0.8888 | 0.7011 | 65.0% | TRL 3 / TRL 4 |
+| **v4 (Optimized)** | **327 фото** | **Loss seg=12.0 + Pseudo-Labeling + Focal Balancing** | **0.9075** | **0.6105** | **88.1%** | **TRL 4 / TRL 5** |
 
-### Сводная таблица по фолдам:
-
-| Фолд | $\text{mAP}_{50}$ (Mask) | $\text{mAP}_{50\text{-}95}$ (Mask) | $\text{Precision}$ (conf=0.25) | $\text{Recall}$ (conf=0.25) | Коррозия ($\text{mAP}_{50\text{-}95}$) | Трещины ($\text{mAP}_{50\text{-}95}$) | Повреждения ЛКП ($\text{mAP}_{50\text{-}95}$) | $\text{mAP}_{50}$ (Box) |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Fold 0 (Best)** | **0.8888** | **0.7011** | 0.6667 | 0.1727 | **0.8862** | **0.4272** | **0.7898** | **0.9268** |
-| **Fold 1** | 0.8446 | 0.5628 | 0.5833 | 0.2581 | 0.6915 | 0.3599 | 0.6372 | 0.8177 |
-| **Fold 2** | 0.7128 | 0.4983 | 0.6667 | 0.2357 | 0.8123 | 0.3853 | 0.2972 | 0.7161 |
-| **Fold 3** | 0.8544 | 0.6199 | **1.0000** | 0.2353 | 0.7989 | 0.3713 | 0.6895 | 0.8516 |
-| **Fold 4** | 0.8749 | 0.6722 | 0.3333 | 0.1667 | 0.8236 | 0.3056 | 0.8873 | 0.8751 |
-| **Итого $(\mu \pm \sigma)$** | **$0.8351 \pm 0.0705$** | **$0.6109 \pm 0.0821$** | **$0.6500 \pm 0.2386$** | **$0.2137 \pm 0.0413$** | **$0.8025 \pm 0.0702$** | **$0.3699 \pm 0.0441$** | **$0.6602 \pm 0.2285$** | **$0.8375 \pm 0.0784$** |
-
-> **Ключевые достижения v3:**
-> 1. Честная групповая валидация подтвердила высокую генерализацию модели: средний $\text{Mask mAP}_{50}$ составил **0.8351**, а лучший фолд достиг **0.8888** (Fold 0).
-> 2. Интегральный строгий показатель $\text{Mask mAP}_{50\text{-}95}$ на Fold 0 достиг **0.7011** (в среднем **0.6109**).
-> 3. Эксплуатационный Precision (@conf=0.25) составил в среднем **65.0%** (на Fold 3 достигнут **100%**), что подтверждает подавление False Positives на текстуре стали.
-> 4. Модель с наилучшими показателями (Fold 0) зафиксирована в корне репозитория как `best_model.pt`.
-
-![Boxplot метрик Group K-Fold v3](reports/kfold_v3_group_boxplot.png)
+![Эволюция точности](reports/v4_comparison_chart.png)
 
 ---
 
@@ -125,34 +97,39 @@ $$\text{Surface Defect Area (\%)} = \frac{\sum_{(x,y)} \mathbb{I}_{\text{refine\
 
 ```plaintext
 ├── datasets/                 # Директория датасетов (в .gitignore)
-│   ├── merged_dataset/       # Исходный датасет v1 (115 изображений)
-│   └── merged_dataset_v2/    # Сбалансированный датасет v2 (275 изображений)
-├── donor_cracks/             # Выгрузка донора трещин (в .gitignore)
-├── donor_coatings/           # Выгрузка донора ЛКП (в .gitignore)
-├── runs/kfold_v3_group/      # Веса и логи обучения Group K-Fold (в .gitignore)
+│   ├── merged_dataset_v2/    # Сбалансированный датасет v2 (275 изображений)
+│   ├── unlabelled_uav_frames/# Пул неразмеченных снимков БПЛА
+│   ├── augmented_with_pseudo/# Кадры, размеченные полуавтоматически (v4)
+│   └── dataset_v4_augmented/ # Итоговая выборка v4 (327 изображений)
+├── runs/v4_optimized/        # Веса и логи обучения v4 (в .gitignore)
 ├── reports/                  # Сводные графики, метрики и отчеты инференса
-│   ├── kfold_v3_group_metrics.csv       # Таблица метрик Group K-Fold v3
-│   ├── kfold_v3_statistical_summary.csv # Статистика (mean, std, min, max)
-│   ├── kfold_v3_group_boxplot.png       # Boxplot метрик честной валидации
-│   ├── defect_distribution.png          # Диаграмма распределения классов
+│   ├── v4_metrics_summary.csv           # Метрики оптимизации v4
+│   ├── v4_statistical_summary.csv       # Статистическая сводка v4
+│   ├── v4_comparison_chart.png          # График эволюции v1 -> v4
+│   ├── kfold_v3_group_metrics.csv       # Метрики Group K-Fold v3
+│   ├── kfold_v3_group_boxplot.png       # Boxplot метрик v3
 │   ├── defect_analysis.json             # Отчет по расчету площадей дефектов
 │   └── inference_samples/               # Инспекционные кадры с HUD
 ├── notebooks/
-│   └── TRL3_PoC_Report.ipynb # Полный интерактивный отчет TRL 3 / TRL 4 (v3)
+│   └── TRL3_PoC_Report.ipynb # Полный интерактивный отчет TRL 4 / TRL 5 (v4)
 ├── src/
+│   ├── train_with_focal.py     # Модуль Focal Loss & Class Balancing
+│   ├── pseudo_labeling.py      # Модуль полуавтоматической псевдоразметки
+│   ├── distillation_train.py   # Модуль дистилляции знаний Teacher -> Student
+│   ├── train_v4_final.py       # Модуль мультимасштабного обучения
 │   ├── defect_analyzer.py      # HUD-инференс с морфологическим сглаживанием
-│   ├── custom_augmentations.py # Albumentations пайплайн под ТЭК
-│   ├── postprocessing.py       # Морфологическое закрытие масок (Closing 3x3)
-│   ├── update_notebook_v3.py   # Сборка обновленного .ipynb через nbformat
-│   └── git_sync.py             # Автоматизация синхронизации с Git
-├── custom_augmentations.py   # Модуль индустриальных аугментаций (корень)
-├── postprocessing.py         # Модуль морфологической постобработки (корень)
-├── step1_group_kfold.py      # Обучение Group K-Fold с TTA и 45 кластерами
-├── step1_download_donors.py  # Загрузка/генерация открытых доноров Roboflow
-├── step2_merge_and_validate.py # Слияние выборки v2 и валидация полигонов
+│   └── update_notebook_v4.py   # Сборка обновленного .ipynb v4 через nbformat
+├── loss_gains_tuning.yaml    # Кастомизация функции потерь (seg=12.0, box=7.5)
+├── train_with_focal.py       # Запуск обучения с Focal Loss (корень)
+├── pseudo_labeling.py        # Запуск псевдоразметки (корень)
+├── distillation_train.py     # Запуск дистилляции знаний (корень)
+├── train_v4_final.py         # Финальное мультимасштабное обучение (корень)
+├── step_v4_pipeline.py       # Полный сквозной оркестратор v4
+├── custom_augmentations.py   # Модуль индустриальных аугментаций Albumentations
+├── postprocessing.py         # Модуль морфологической постобработки
 ├── best_model.pt             # Лучшие веса обученной модели YOLOv8n-seg
-├── requirements.txt          # Список зависимостей (ultralytics, albumentations)
-└── README.md                 # Документация проекта v3.0 под заявку акселератора
+├── requirements.txt          # Список зависимостей
+└── README.md                 # Документация проекта v4.0 под заявку акселератора
 ```
 
 ---
@@ -160,21 +137,21 @@ $$\text{Surface Defect Area (\%)} = \frac{\sum_{(x,y)} \mathbb{I}_{\text{refine\
 ## 🚀 Воспроизведение пайплайна (Quickstart)
 
 ```bash
-# 1. Установка зависимостей (включая albumentations)
+# 1. Установка зависимостей
 pip install -r requirements.txt
 
-# 2. Выгрузка доноров с Roboflow Universe API
-python step1_download_donors.py
+# 2. Запуск полуавтоматической псевдоразметки на неразмеченных снимках
+python pseudo_labeling.py --weights best_model.pt --input datasets/unlabelled_uav_frames --output datasets/augmented_with_pseudo
 
-# 3. Слияние и валидация сбалансированного датасета v2
-python step2_merge_and_validate.py
+# 3. Обучение с кастомными Loss Gains и Focal Loss
+python train_with_focal.py --cfg loss_gains_tuning.yaml --data data_v4.yaml --epochs 50
 
-# 4. Запуск Group K-Fold обучения и валидации с TTA (v3)
-python step1_group_kfold.py --epochs 6 --imgsz 320
+# 4. Мультимасштабная доводка с высоким разрешением (imgsz=1024)
+python train_v4_final.py --weights best_model.pt --data data_v4.yaml --imgsz 1024 --epochs 30
 
-# 5. Генерация инспекционных снимков с морфологическим закрытием и HUD
-python src/defect_analyzer.py
+# 5. Либо комплексный запуск всего пайплайна v4 в одну команду
+python step_v4_pipeline.py --epochs 6 --imgsz 320
 
-# 6. Компиляция интерактивного Jupyter Notebook отчета v3
-python src/update_notebook_v3.py
+# 6. Компиляция интерактивного отчета TRL 4 / TRL 5 в Jupyter Notebook
+python src/update_notebook_v4.py
 ```

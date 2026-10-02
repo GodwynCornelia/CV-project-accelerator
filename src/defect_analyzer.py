@@ -14,6 +14,17 @@ from pathlib import Path
 from ultralytics import YOLO
 from postprocessing import refine_mask_borders
 
+# Safe unpickling of trainer mocks from PyTorch checkpoints
+class _MockSeries:
+    def __init__(self, data=None): self._data = list(data) if data is not None else []
+    def to_list(self): return self._data
+    def max(self): return max(self._data) if self._data else 0.0
+
+class _MockRes:
+    def __init__(self): self.columns = []
+    def __getitem__(self, item): return _MockSeries()
+
+
 
 DEFECT_METADATA = {
     0: {

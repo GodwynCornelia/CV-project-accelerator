@@ -1,0 +1,2 @@
+iteration,mAP50_mask,mAP50_95_mask,precision_c25,recall_c25,precision_c35,recall_c35,corrosion_mAP50_95,crack_mAP50_95,coating_mAP50_95,box_mAP50,pseudo_samples_added
+v4_focal_pseudo,0.9075,0.6105,0.881,0.7835,0.921,0.6753,0.7331,0.3203,0.7782,0.9213,22
